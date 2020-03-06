@@ -1,6 +1,3 @@
-import java.util.HashMap;
-import java.util.HashSet;
-
 /**
  * Created by Yang on 1/23/20.
  */
@@ -26,7 +23,7 @@ public class StringArrayUtils {
      * @return last element in specified array
      */ // TODO
     public static String getLastElement(String[] array) {
-        return array[array.length-1];
+        return array[array.length - 1];
     }
 
     /**
@@ -34,7 +31,7 @@ public class StringArrayUtils {
      * @return second to last element in specified array
      */ // TODO
     public static String getSecondToLastElement(String[] array) {
-        return array[array.length-2];
+        return array[array.length - 2];
     }
 
     /**
@@ -43,8 +40,8 @@ public class StringArrayUtils {
      * @return true if the array contains the specified `value`
      */ // TODO
     public static boolean contains(String[] array, String value) {
-        for (int i = 0 ; i <array.length; i++){
-            if(array[i].equals(value)) return true;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i].equals(value)) return true;
         }
         return false;
     }
@@ -56,7 +53,7 @@ public class StringArrayUtils {
     public static String[] reverse(String[] array) {
         String[] ans = new String[array.length];
         int j = 0;
-        for(int i = array.length-1; i>=0;i--){
+        for (int i = array.length - 1; i >= 0; i--) {
             ans[j] = array[i];
             j++;
         }
@@ -68,9 +65,9 @@ public class StringArrayUtils {
      * @return true if the order of the array is the same backwards and forwards
      */ // TODO
     public static boolean isPalindromic(String[] array) {
-        int left = 0, right =array.length-1;
-        while(left<right){
-            if(!array[left].equals(array[right])) return false;
+        int left = 0, right = array.length - 1;
+        while (left < right) {
+            if (!array[left].equals(array[right])) return false;
             left++;
             right--;
         }
@@ -82,17 +79,21 @@ public class StringArrayUtils {
      * @return true if each letter in the alphabet has been used in the array
      */ // TODO
     public static boolean isPangramic(String[] array) {
-        HashSet set = new HashSet();
-        for (int i = 0 ; i <array.length; i++){
-            for (int j = 0 ; j <array[i].length();j++){
-                if (Character.isLetter(array[i].charAt(j))){
-                    if (!set.contains(Character.toLowerCase(array[i].charAt(j)))){
-                        set.add(Character.toLowerCase(array[i].charAt(j)));
-                    }
+        boolean letters[] = new boolean['z' + 1];
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length(); j++) {
+                if (Character.isLetter(array[i].charAt(j))) {
+                    char cur = Character.toLowerCase(array[i].charAt(j));
+                    letters[cur] = true;
                 }
             }
         }
-        return set.size()==26;
+        for (int i = 'a'; i <= 'z'; i++) {
+            if (!letters[i]) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -101,9 +102,9 @@ public class StringArrayUtils {
      * @return number of occurrences the specified `value` has occurred
      */ // TODO
     public static int getNumberOfOccurrences(String[] array, String value) {
-        int ans= 0;
-        for (int i = 0 ; i < array.length;i++){
-            if(array[i].equals(value)) ans++;
+        int ans = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i].equals(value)) ans++;
         }
         return ans;
     }
@@ -114,13 +115,13 @@ public class StringArrayUtils {
      * @return array with identical contents excluding values of `value`
      */ // TODO
     public static String[] removeValue(String[] array, String valueToRemove) {
-        String ans[] = new String[array.length-1];
-        int j = 0 ;
-        for (int i = 0 ; i <array.length; i++ ){
-            if(!array[i].equals(valueToRemove)){
+        String ans[] = new String[array.length - 1];
+        int j = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (!array[i].equals(valueToRemove)) {
                 ans[j++] = array[i];
             }
-        } 
+        }
         return ans;
     }
 
@@ -131,8 +132,8 @@ public class StringArrayUtils {
     public static String[] removeConsecutiveDuplicates(String[] array) {
         int size = 1;
         String prev = array[0];
-        for (int i = 1 ; i<array.length; i++){
-            if(!prev.equals(array[i])){
+        for (int i = 1; i < array.length; i++) {
+            if (!prev.equals(array[i])) {
                 prev = array[i];
                 size++;
             }
@@ -141,8 +142,8 @@ public class StringArrayUtils {
         prev = array[0];
         ans[0] = prev;
         size = 1;
-        for (int i = 1 ; i<array.length; i++){
-            if(!prev.equals(array[i])){
+        for (int i = 1; i < array.length; i++) {
+            if (!prev.equals(array[i])) {
                 prev = array[i];
                 ans[size++] = prev;
             }
@@ -157,8 +158,8 @@ public class StringArrayUtils {
     public static String[] packConsecutiveDuplicates(String[] array) {
         int size = 1;
         String prev = array[0];
-        for (int i = 1 ; i<array.length; i++){
-            if(!prev.equals(array[i])){
+        for (int i = 1; i < array.length; i++) {
+            if (!prev.equals(array[i])) {
                 prev = array[i];
                 size++;
             }
@@ -167,12 +168,12 @@ public class StringArrayUtils {
         prev = array[0];
         ans[0] = prev;
         size = 0;
-        for (int i = 1 ; i<array.length; i++){
-            if(!prev.equals(array[i])){
+        for (int i = 1; i < array.length; i++) {
+            if (!prev.equals(array[i])) {
                 prev = array[i];
-                ans[++size] = ""+prev;
-            }else{
-                ans[size]=ans[size]+prev;
+                ans[++size] = "" + prev;
+            } else {
+                ans[size] = ans[size] + prev;
             }
         }
         return ans;
